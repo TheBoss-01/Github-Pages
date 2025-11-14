@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Presentación del Equipo</title>
+    
+    <!-- Enlace al favicon.ico (asegúrate de que el archivo se llame así y esté en la raíz) -->
+    <link rel="icon" href="favicon.ico" type="image/x-icon">
+
+    <!-- Estilos CSS simples dentro del HTML para no complicarse con más archivos -->
+    <style>
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+            line-height: 1.6;
+            background-color: #f4f7f6;
+            color: #333;
+            margin: 0;
+            padding: 0;
+        }
+        .container {
+            max-width: 900px;
+            margin: 20px auto;
+            padding: 20px;
+            background-color: #ffffff;
+            border-radius: 8px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+        }
+        header {
+            text-align: center;
+            padding-bottom: 20px;
+            border-bottom: 2px solid #e0e0e0;
+        }
+        header h1 {
+            color: #2a7aE2; /* Un toque de color */
+            margin: 0;
+        }
+        .team-grid {
+            display: grid;
+            /* Se adapta automáticamente: 1 columna en móvil, 2 en tablet/desktop */
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 20px;
+            margin-top: 20px;
+        }
+        .team-member {
+            padding: 20px;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            background-color: #fafafa;
+        }
+        .team-member h2 {
+            color: #333;
+            border-bottom: 1px solid #eee;
+            padding-bottom: 5px;
+        }
+        .team-member p {
+            margin-bottom: 10px;
+        }
+        .team-member a {
+            color: #2a7aE2;
+            text-decoration: none;
+            font-weight: bold;
+        }
+        .team-member a:hover {
+            text-decoration: underline;
+        }
+        footer {
+            text-align: center;
+            margin-top: 30px;
+            font-size: 0.9em;
+            color: #888;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <header>
+            <h1>Nuestro Equipo de Proyecto</h1>
+            <p>Un proyecto desplegado con GitHub Pages</p>
+        </header>
+
+        <main>
+            <div class="team-grid">
+                
+                <!-- 
+                  *** TAREA PARA CADA MIEMBRO ***
+                  Copiad y pegad este bloque "team-member" y rellenadlo con vuestros datos 
+                  en vuestra propia rama "feature/perfil-nombre".
+                -->
+
+                <!-- Miembro 1 -->
+                <article class="team-member">
+                    <h2>[Nombre del Miembro 1]</h2>
+                    <p>
+                        Breve biografía aquí. Puedes hablar de lo que estudias, tus hobbies
+                        o tus 3 películas favoritas.
+                    </p>
+                    <a href="https://github.com/[tu-usuario-github]" target="_blank">Mi Perfil de GitHub</a>
+                </article>
+
+                <!-- Miembro 2 -->
+                <article class="team-member">
+                    <h2>[Nombre del Miembro 2]</h2>
+                    <p>
+                        Breve biografía aquí. Puedes hablar de lo que estudias, tus hobbies
+                        o tus 3 películas favoritas.
+                    </p>
+                    <a href="https://github.com/[tu-usuario-github]" target="_blank">Mi Perfil de GitHub</a>
+                </article>
+
+                <!-- Miembro 3 -->
+                <article class="team-member">
+                    <h2>[Nombre del Miembro 3]</h2>
+                    <p>
+                        Breve biografía aquí. Puedes hablar de lo que estudias, tus hobbies
+                        o tus 3 películas favoritas.
+                    </p>
+                    <a href="https://github.com/[tu-usuario-github]" target="_blank">Mi Perfil de GitHub</a>
+                </article>
+
+                <!-- Miembro 4 -->
+                <article class="team-member">
+                    <h2>[Nombre del Miembro 4]</h2>
+                    <p>
+                        Breve biografía aquí. Puedes hablar de lo que estudias, tus hobbies
+                        o tus 3 películas favoritas.
+                    </p>
+                    <a href="https://github.com/[tu-usuario-github]" target="_blank">Mi Perfil de GitHub</a>
+                </article>
+
+            </div>
+        </main>
+
+        <footer>
+            <p>Proyecto realizado para la asignatura [Nombre de la Asignatura].</p>
+        </footer>
+    </div>
+
+</body>
+</html>
