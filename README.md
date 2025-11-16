@@ -9,7 +9,7 @@ Miembros del Equipo:
 
 [Nombre Miembro 1]
 
-[Nombre Miembro 2]
+Felipe Jaurena
 
 Sergio Gamero Julià
 
