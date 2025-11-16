@@ -72,5 +72,347 @@
 
 </body>
 
-</html>
+</html> 
+
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>FAPS GAME</title>
+    <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" rel="stylesheet">
+    
+    <style>
+        body {
+            font-family: 'Press Start 2P', cursive;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+            background-color: #000;
+            background-image: radial-gradient(circle, #111 1px, transparent 1px);
+            background-size: 15px 15px;
+            margin: 0;
+            color: #E0E0E0;
+            overflow: hidden;
+        }
+
+        h1 {
+            color: #FF2E63; 
+            text-shadow: 0 0 10px #FF2E63, 0 0 20px #FF2E63;
+        }
+
+        canvas {
+            background: #000;
+            border-radius: 5px;
+            box-shadow: 0 0 20px #5F00B8, 
+                        0 0 30px #5F00B8,
+                        inset 0 0 15px rgba(95, 0, 184, 0.5);
+        }
+
+        p {
+            font-size: 0.8em;
+            margin-top: 20px;
+            color: #AAA;
+        }
+    </style>
+</head>
+<body>
+
+    <h1>FAPS GAMES</h1>
+    <canvas id="gameCanvas" width="600" height="700"></canvas>
+    <p>⬅️ ➡️ para Moverse | [ESPACIO] para Disparar</p>
+
+    <script>
+        
+        const canvas = document.getElementById('gameCanvas');
+        const ctx = canvas.getContext('2d');
+
+        
+        let player = {
+            x: canvas.width / 2 - 25,
+            y: canvas.height - 50,
+            width: 50,
+            height: 20,
+            speed: 5
+        };
+
+        let playerLaser = {
+            x: 0,
+            y: 0,
+            width: 5,
+            height: 15,
+            speed: 10,
+            active: false 
+        };
+
+        let aliens = [];
+        let alienConfig = {
+            rowCount: 4,
+            columnCount: 8,
+            width: 40,
+            height: 20,
+            padding: 15,
+            offsetTop: 50,
+            offsetLeft: 35,
+            speed: 2,
+            direction: 1 
+        };
+
+        let bombs = []; 
+        let bombConfig = {
+            width: 5,
+            height: 10,
+            speed: 5,
+            dropChance: 0.002 
+        };
+
+        let score = 0;
+        let lives = 3;
+        let gameOver = false;
+
+        
+        let rightPressed = false;
+        let leftPressed = false;
+
+        document.addEventListener('keydown', keyDownHandler, false);
+        document.addEventListener('keyup', keyUpHandler, false);
+
+        function keyDownHandler(e) {
+            if (e.key === 'Right' || e.key === 'ArrowRight') rightPressed = true;
+            else if (e.key === 'Left' || e.key === 'ArrowLeft') leftPressed = true;
+            else if (e.key === ' ' || e.key === 'Spacebar') {
+                fireLaser();
+            }
+        }
+
+        function keyUpHandler(e) {
+            if (e.key === 'Right' || e.key === 'ArrowRight') rightPressed = false;
+            else if (e.key === 'Left' || e.key === 'ArrowLeft') leftPressed = false;
+        }
+
+       
+        function createAliens() {
+            for (let c = 0; c < alienConfig.columnCount; c++) {
+                for (let r = 0; r < alienConfig.rowCount; r++) {
+                    aliens.push({
+                        x: (c * (alienConfig.width + alienConfig.padding)) + alienConfig.offsetLeft,
+                        y: (r * (alienConfig.height + alienConfig.padding)) + alienConfig.offsetTop,
+                        status: 1 // 1 = vivo
+                    });
+                }
+            }
+        }
+
+        function fireLaser() {
+            
+            if (!playerLaser.active) {
+                playerLaser.x = player.x + player.width / 2 - playerLaser.width / 2;
+                playerLaser.y = player.y;
+                playerLaser.active = true;
+            }
+        }
+        
+        function alienFire(alien) {
+          
+            bombs.push({
+                x: alien.x + alienConfig.width / 2 - bombConfig.width / 2,
+                y: alien.y + alienConfig.height,
+                width: bombConfig.width,
+                height: bombConfig.height,
+                speed: bombConfig.speed
+            });
+        }
+
+      
+        function drawPlayer() {
+            ctx.beginPath();
+            ctx.rect(player.x, player.y, player.width, player.height);
+            
+            ctx.fillStyle = '#00FFD1';
+            ctx.shadowColor = '#00FFD1';
+            ctx.shadowBlur = 10;
+            
+            ctx.moveTo(player.x + player.width / 2, player.y);
+            ctx.lineTo(player.x, player.y + player.height);
+            ctx.lineTo(player.x + player.width, player.y + player.height);
+            ctx.fill();
+            
+            ctx.closePath();
+            ctx.shadowBlur = 0;
+        }
+
+        function drawLaser() {
+            if (playerLaser.active) {
+                ctx.beginPath();
+                ctx.rect(playerLaser.x, playerLaser.y, playerLaser.width, playerLaser.height);
+                ctx.fillStyle = '#FFEA00'; 
+                ctx.shadowColor = '#FFEA00';
+                ctx.shadowBlur = 10;
+                ctx.fill();
+                ctx.closePath();
+                ctx.shadowBlur = 0;
+            }
+        }
+        
+        function drawBombs() {
+            ctx.fillStyle = '#FF2E63'; 
+            ctx.shadowColor = '#FF2E63';
+            ctx.shadowBlur = 10;
+            bombs.forEach(bomb => {
+                ctx.beginPath();
+                ctx.arc(bomb.x + bomb.width / 2, bomb.y, bomb.width / 2, 0, Math.PI * 2);
+                ctx.fill();
+                ctx.closePath();
+            });
+            ctx.shadowBlur = 0;
+        }
+
+        function drawAliens() {
+         
+            const colors = ['#F44336', '#9C27B0', '#3F51B5', '#4CAF50'];
+            
+            aliens.forEach((alien, index) => {
+                if (alien.status === 1) {
+                    let color = colors[Math.floor(index / alienConfig.columnCount) % colors.length];
+                    ctx.beginPath();
+                    ctx.rect(alien.x, alien.y, alienConfig.width, alienConfig.height);
+                    ctx.fillStyle = color;
+                    ctx.fill();
+                    ctx.closePath();
+
+                    
+                    ctx.fillStyle = '#000';
+                    ctx.fillRect(alien.x + 8, alien.y + 8, 5, 5);
+                    ctx.fillRect(alien.x + 27, alien.y + 8, 5, 5);
+                }
+            });
+        }
+        
+        function drawUI() {
+            ctx.font = '16px "Press Start 2P"';
+            ctx.fillStyle = '#FFFFFF';
+           
+            ctx.fillText('Puntos: ' + score, 10, 25);
+          
+            ctx.fillText('Vidas: ', canvas.width - 150, 25);
+            ctx.fillStyle = '#00FFD1';
+            for(let i=0; i < lives; i++) {
+               
+                ctx.beginPath();
+                let lifeX = canvas.width - 60 + (i * 25);
+                ctx.moveTo(lifeX + 10, 10);
+                ctx.lineTo(lifeX, 25);
+                ctx.lineTo(lifeX + 20, 25);
+                ctx.fill();
+                ctx.closePath();
+            }
+        }
+
+      
+        
+        function updateGameState() {
+            if (gameOver) return;
+
+           
+            if (rightPressed && player.x < canvas.width - player.width) {
+                player.x += player.speed;
+            } else if (leftPressed && player.x > 0) {
+                player.x -= player.speed;
+            }
+
+            if (playerLaser.active) {
+                playerLaser.y -= playerLaser.speed;
+                if (playerLaser.y < 0) {
+                    playerLaser.active = false;
+                }
+                
+               
+                aliens.forEach(alien => {
+                    if (alien.status === 1 && playerLaser.active) {
+                        if (
+                            playerLaser.x > alien.x &&
+                            playerLaser.x < alien.x + alienConfig.width &&
+                            playerLaser.y > alien.y &&
+                            playerLaser.y < alien.y + alienConfig.height
+                        ) {
+                            playerLaser.active = false;
+                            alien.status = 0; 
+                            score += 10;
+                        }
+                    }
+                });
+            }
+            
+           
+            aliens = aliens.filter(alien => alien.status === 1);
+            if (aliens.length === 0) {
+                winGame();
+            }
+
+           
+            let moveDown = false;
+            aliens.forEach(alien => {
+                alien.x += alienConfig.speed * alienConfig.direction;
+                
+                if (alien.x + alienConfig.width >= canvas.width || alien.x <= 0) {
+                    moveDown = true;
+                }
+                
+               
+                if (Math.random() < bombConfig.dropChance) {
+                    alienFire(alien);
+                }
+                
+                
+                if (alien.y + alienConfig.height > player.y) {
+                    loseGame("¡Los invasores han llegado!");
+                }
+            });
+
+            if (moveDown) {
+                alienConfig.direction *= -1; 
+                aliens.forEach(alien => {
+                    alien.y += alienConfig.height / 2; 
+                });
+            }
+            
+            
+            bombs.forEach((bomb, index) => {
+                bomb.y += bomb.speed;
+              
+                if (bomb.y > canvas.height) {
+                    bombs.splice(index, 1);
+                }
+                
+               
+                if (
+                    bomb.x > player.x &&
+                    bomb.x < player.x + player.width &&
+                    bomb.y > player.y &&
+                    bomb.y < player.y + player.height
+                ) {
+                    bombs.splice(index, 1); 
+                    playerHit();
+                }
+            });
+        }
+        
+        function playerHit() {
+            lives--;
+            if (lives <= 0) {
+                loseGame("¡Has sido destruido!");
+            }
+        }
+
+        function loseGame(message) {
+            gameOver = true;
+            ctx.fillStyle = 'rgba(0, 0, 0, 0.7)';
+            ctx.fillRect(0, 0, canvas.width, canvas.height);
+            ctx.fillStyle = '#FF2E63';
+            ctx.font = '30px "Press Start 2P"';
+            ctx.textAlign = 'center';
+            ctx.fillText
+
+
 
