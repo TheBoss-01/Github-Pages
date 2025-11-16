@@ -9,9 +9,9 @@ Miembros del Equipo:
 
 TheBoss-01
 
-Felipe Jaurena
+FelipeJM18
 
-Sergio Gamero Julià
+sgameroj
 
 prmarango-afk
 
