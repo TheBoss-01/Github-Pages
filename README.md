@@ -9,11 +9,11 @@ Miembros del Equipo:
 
 TheBoss-01
 
-[Nombre Miembro 2]
+FelipeJM18
 
-[Nombre Miembro 3]
+sgameroj
 
-[Nombre Miembro 4]
+prmarango-afk
 
 Ciclo de Vida del Desarrollo
 
