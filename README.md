@@ -3,11 +3,11 @@ Proyecto de Despliegue con GitHub Pages
 
 Este proyecto es una demostración simple de cómo desplegar una página web estática (index.html) utilizando GitHub Pages, siguiendo un ciclo de vida de desarrollo básico con Git.
 
-Enlace a la web desplegada: [Inserta aquí tu URL de GitHub Pages]
+Enlace a la web desplegada: (https://github.com/TheBoss-01/Github-Pages.git)
 
 Miembros del Equipo:
 
-[Nombre Miembro 1]
+TheBoss-01
 
 [Nombre Miembro 2]
 
@@ -22,9 +22,9 @@ A continuación, se detalla el ciclo de vida seguido para este proyecto, tal com
 1. Planificación
 
 Elección de Temática:
-(Escribid aquí por qué elegisteis esta temática. Ejemplo: "Decidimos crear una 'Página de Presentación del Equipo' porque es una idea sencilla, nos permite dividir el trabajo equitativamente (cada uno hace su perfil) y es perfecta para un proyecto estático de una sola página. Cumple el objetivo sin añadir complejidad innecesaria.")
+Decidimos crear una 'Página de Presentación del Equipo' porque es una idea sencilla, nos permite dividir el trabajo equitativamente (cada uno hace su perfil) y es perfecta para un proyecto estático de una sola página. Cumple el objetivo sin añadir complejidad innecesaria.
 
-Definición de Usuarios (Personas):
+Definición de Usuarios:
 
 Usuario 1: El Profesor/Corrector:
 
@@ -49,36 +49,36 @@ R3 (Técnico): La página debe cargarse correctamente cuando se accede a través
 2. Diseño
 
 Arquitectura Cliente-Servidor:
-(Aquí va vuestra explicación superficial. Ejemplo: "Nuestra aplicación sigue una arquitectura cliente-servidor muy simple.
+Nuestra aplicación sigue una arquitectura cliente-servidor muy simple.
 
-El Servidor: En este caso, son los servidores de GitHub Pages. Su único trabajo es almacenar nuestros archivos estáticos (index.html, favicon.ico).
+El Servidor: En este caso, son los servidores de GitHub Pages. Su único trabajo es almacenar nuestros archivos (index.html, favicon.ico).
 
 El Cliente: Es el navegador web del usuario (Chrome, Firefox, etc.).
 
-El Flujo: Cuando el usuario (cliente) escribe nuestra URL en su navegador, el navegador envía una petición (request) a los servidores de GitHub (servidor). El servidor encuentra nuestro archivo index.html y se lo envía de vuelta (response) al navegador. El navegador entonces lee el HTML y el CSS para 'dibujar' la página que el usuario ve.")
+El Flujo: Cuando el usuario (cliente) escribe nuestra URL en su navegador, el navegador envía una petición (request) a los servidores de GitHub (servidor). El servidor encuentra nuestro archivo index.html y se lo envía de vuelta (response) al navegador. El navegador entonces lee el HTML y el CSS para 'dibujar' la página que el usuario ve.
 
 3. Despliegue
 
 Nuestra Experiencia usando GitHub Pages:
-(Comentad vuestra experiencia. Ejemplo: "Nuestra experiencia ha sido muy positiva. El proceso de configuración en Settings > Pages fue intuitivo. Lo configuramos para que desplegara la rama main.
-
-Lo más interesante fue ver el flujo de trabajo en acción: trabajábamos en ramas feature/*, las mezclábamos en develop, y no era hasta que hacíamos el merge final de develop a main que la web se actualizaba. El despliegue era automático y tardaba solo uno o dos minutos en reflejar los cambios. Es una herramienta muy potente para desplegar proyectos estáticos de forma gratuita y rápida.")
+Nuestra experiencia ha sido muy negativa ya que al ser nuevos en GitHub hemos hecho muchos errores sin darnos cuenta. Se puede observar nuestra frustación en los comentarios al hacer merge.
 
 4. Mantenimiento
 
 Errores Encontrados (y Soluciones):
 
-(Ejemplo 1) Error: Al principio, el favicon.ico no aparecía.
+Error: Al principio, trabajabamos todos desde "main".
 
-Solución: Nos dimos cuenta de que el navegador lo había guardado en caché. Al borrar la caché (o probar en modo incógnito) vimos que sí funcionaba.
+Solución: Creamos un rama llamada "desarrollo" y desde ahi haciamos cad uno una branch.
 
-(Ejemplo 2) Error: Conflicto de merge.
+Error: Conflicto de merge.
 
-Solución: Dos miembros editaron la misma línea en el index.html (por ejemplo, el título) en ramas diferentes. Tuvimos que resolver el conflicto manualmente en el Pull Request antes de poder mezclarlo en develop, eligiendo qué versión queríamos mantener.
+Solución: Dos miembros editaron la misma línea en el index.html en ramas diferentes. Tuvimos que resolver el conflicto manualmente en el Pull Request antes de poder mezclarlo en develop, eligiendo qué versión queríamos mantener.
+
+Error: Conflicto de tirar de la "main" en vez de "desarrollo".
+
+Solución: Cada vez que se crea una branch o pull requeste hay que fijarse muy bien desde donde lon haces.
 
 Mejoras Futuras:
-
-Añadir estilos CSS más avanzados o mover el CSS a un archivo .css separado.
 
 Hacer que el diseño sea responsive de forma más robusta (aunque el que hemos puesto se adapta bastante bien).
 
