@@ -11,7 +11,7 @@ Miembros del Equipo:
 
 [Nombre Miembro 2]
 
-[Nombre Miembro 3]
+Sergio Gamero Julià
 
 [Nombre Miembro 4]
 
