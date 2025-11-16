@@ -13,7 +13,7 @@ Miembros del Equipo:
 
 [Nombre Miembro 3]
 
-[Nombre Miembro 4]
+prmarango-afk
 
 Ciclo de Vida del Desarrollo
 
